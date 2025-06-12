@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade Setup Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen p-4">
+  <div class="max-w-xl mx-auto space-y-6">
+    <h1 class="text-2xl font-bold text-center">Trade Setup Calculator</h1>
+
+    <form id="calcForm" class="space-y-4">
+      <div>
+        <label class="block mb-1">Position Type</label>
+        <select id="position" class="w-full p-2 bg-gray-800 rounded">
+          <option value="long">Long</option>
+          <option value="short">Short</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1">Leverage (x)</label>
+        <input type="number" id="leverage" step="0.1" class="w-full p-2 bg-gray-800 rounded">
+      </div>
+
+      <div>
+        <label class="block mb-1">Margin (USD)</label>
+        <input type="number" id="margin" step="0.01" class="w-full p-2 bg-gray-800 rounded">
+      </div>
+
+      <div>
+        <label class="block mb-1">Entry Price</label>
+        <input type="number" id="entry" step="0.000000001" class="w-full p-2 bg-gray-800 rounded">
+      </div>
+
+      <div>
+        <label class="block mb-1">Custom Profit Target</label>
+        <input type="number" id="customTarget" step="0.01" class="w-full p-2 bg-gray-800 rounded">
+        <select id="customType" class="mt-2 w-full p-2 bg-gray-800 rounded">
+          <option value="percent">%</option>
+          <option value="usd">USD</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1">Fee (%)</label>
+        <input type="number" id="fee" step="0.01" class="w-full p-2 bg-gray-800 rounded">
+      </div>
+
+      <div>
+        <label class="block mb-1">Decimal Places</label>
+        <input type="number" id="decimals" value="9" step="1" min="0" max="12" class="w-full p-2 bg-gray-800 rounded">
+      </div>
+
+      <button type="button" onclick="calculate()" class="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-bold">Calculate</button>
+    </form>
+
+    <div id="results" class="space-y-2"></div>
+  </div>
+
+  <script>
+    function getMaintenanceMarginRate(positionSizeUSD) {
+      if (positionSizeUSD <= 50000) return 0.005;
+      if (positionSizeUSD <= 200000) return 0.01;
+      if (positionSizeUSD <= 500000) return 0.015;
+      if (positionSizeUSD <= 1000000) return 0.02;
+      return 0.025; // Above 1M USD
+    }
+
+    function calculate() {
+      const position = document.getElementById('position').value;
+      const leverage = parseFloat(document.getElementById('leverage').value);
+      const margin = parseFloat(document.getElementById('margin').value);
+      const entry = parseFloat(document.getElementById('entry').value);
+      const customTarget = parseFloat(document.getElementById('customTarget').value);
+      const customType = document.getElementById('customType').value;
+      const fee = parseFloat(document.getElementById('fee').value);
+      const decimals = parseInt(document.getElementById('decimals').value);
+
+      const targetPercents = [5, 10, 15, 25, 50, 75, 100, 150, 200];
+      const results = document.getElementById('results');
+      results.innerHTML = "";
+
+      results.innerHTML += `<h2 class='text-xl font-bold'>Profit Target Prices:</h2>`;
+      targetPercents.forEach(p => {
+        const targetUSD = margin * (p / 100);
+        const priceMove = targetUSD / (margin * leverage);
+        const priceTarget = position === 'long' ? entry + (entry * priceMove) : entry - (entry * priceMove);
+        results.innerHTML += `<div>${p}% → $${priceTarget.toFixed(decimals)}</div>`;
+      });
+
+      if (!isNaN(customTarget)) {
+        let customMove;
+        if (customType === 'percent') {
+          customMove = margin * (customTarget / 100);
+        } else {
+          customMove = customTarget;
+        }
+        const priceMove = customMove / (margin * leverage);
+        const priceTarget = position === 'long' ? entry + (entry * priceMove) : entry - (entry * priceMove);
+        results.innerHTML += `<div>Custom Target → $${priceTarget.toFixed(decimals)}</div>`;
+      }
+
+      // Position size and maintenance margin based on estimated tier
+      const positionSize = (margin * leverage) / entry;
+      const positionSizeUSD = positionSize * entry;
+      const maintenanceRate = getMaintenanceMarginRate(positionSizeUSD);
+      const maintenanceMargin = margin * maintenanceRate;
+
+      let liquidation;
+      if (position === 'long') {
+        liquidation = (maintenanceMargin - margin + (entry * positionSize)) / positionSize;
+      } else {
+        liquidation = ((entry * positionSize) - maintenanceMargin + margin) / positionSize;
+      }
+
+      results.innerHTML += `<h2 class='text-xl font-bold mt-4'>Liquidation Price:</h2>`;
+      results.innerHTML += `<div>$${liquidation.toFixed(decimals)}</div>`;
+      results.innerHTML += `<div class='text-sm text-gray-400'>Maintenance Margin Rate Used: ${(maintenanceRate * 100).toFixed(2)}%</div>`;
+    }
+  </script>
+</body>
+
+</html>
