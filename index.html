@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Trade Setup Calculator&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;body class="bg-gray-900 text-white min-h-screen p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="max-w-xl mx-auto space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1 class="text-2xl font-bold text-center"&gt;Trade Setup Calculator&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;form id="calcForm" class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Position Type&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="position" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="long"&gt;Long&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="short"&gt;Short&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Leverage (x)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="leverage" step="0.1" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Margin (USD)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="margin" step="0.01" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Entry Price&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="entry" step="0.000000001" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Custom Profit Target&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="customTarget" step="0.01" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="customType" class="mt-2 w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="percent"&gt;%&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="usd"&gt;USD&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Fee (%)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="fee" step="0.01" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="block mb-1"&gt;Decimal Places&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="decimals" value="9" step="1" min="0" max="12" class="w-full p-2 bg-gray-800 rounded"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button type="button" onclick="calculate()" class="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-bold"&gt;Calculate&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="results" class="space-y-2"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function getMaintenanceMarginRate(positionSizeUSD) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (positionSizeUSD &lt;= 50000) return 0.005;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (positionSizeUSD &lt;= 200000) return 0.01;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (positionSizeUSD &lt;= 500000) return 0.015;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (positionSizeUSD &lt;= 1000000) return 0.02;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return 0.025; // Above 1M USD</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function calculate() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const position = document.getElementById('position').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const leverage = parseFloat(document.getElementById('leverage').value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const margin = parseFloat(document.getElementById('margin').value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const entry = parseFloat(document.getElementById('entry').value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const customTarget = parseFloat(document.getElementById('customTarget').value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const customType = document.getElementById('customType').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const fee = parseFloat(document.getElementById('fee').value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const decimals = parseInt(document.getElementById('decimals').value);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const targetPercents = [5, 10, 15, 25, 50, 75, 100, 150, 200];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const results = document.getElementById('results');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML = "";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML += `&lt;h2 class='text-xl font-bold'&gt;Profit Target Prices:&lt;/h2&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>targetPercents.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const targetUSD = margin * (p / 100);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const priceMove = targetUSD / (margin * leverage);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const priceTarget = position === 'long' ? entry + (entry * priceMove) : entry - (entry * priceMove);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>results.innerHTML += `&lt;div&gt;${p}% → $${priceTarget.toFixed(decimals)}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!isNaN(customTarget)) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let customMove;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (customType === 'percent') {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>customMove = margin * (customTarget / 100);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>customMove = customTarget;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const priceMove = customMove / (margin * leverage);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const priceTarget = position === 'long' ? entry + (entry * priceMove) : entry - (entry * priceMove);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>results.innerHTML += `&lt;div&gt;Custom Target → $${priceTarget.toFixed(decimals)}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Position size and maintenance margin based on estimated tier</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const positionSize = (margin * leverage) / entry;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const positionSizeUSD = positionSize * entry;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const maintenanceRate = getMaintenanceMarginRate(positionSizeUSD);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const maintenanceMargin = margin * maintenanceRate;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>let liquidation;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (position === 'long') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>liquidation = (maintenanceMargin - margin + (entry * positionSize)) / positionSize;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>liquidation = ((entry * positionSize) - maintenanceMargin + margin) / positionSize;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML += `&lt;h2 class='text-xl font-bold mt-4'&gt;Liquidation Price:&lt;/h2&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML += `&lt;div&gt;$${liquidation.toFixed(decimals)}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>results.innerHTML += `&lt;div class='text-sm text-gray-400'&gt;Maintenance Margin Rate Used: ${(maintenanceRate * 100).toFixed(2)}%&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
